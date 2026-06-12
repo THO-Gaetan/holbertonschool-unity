@@ -29,7 +29,7 @@ public class FirstPersonCamera : MonoBehaviour
         
         transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

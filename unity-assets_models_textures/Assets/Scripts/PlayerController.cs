@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask WhatIsClimbable;
     bool canClimb = false;
     float ClimbSpeed = 1.10f;
+
+    public GameObject FallingBall;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,11 +35,11 @@ public class PlayerController : MonoBehaviour
     {
         if (thirdPersonCam.activeSelf)
         {
-            movement.x = Input.GetKey(KeyCode.D) ? 1 :
-            Input.GetKey(KeyCode.A) ? -1 : 0;
-
-            movement.z = Input.GetKey(KeyCode.W) ? 1 :
+            movement.x = Input.GetKey(KeyCode.W) ? 1 :
             Input.GetKey(KeyCode.S) ? -1 : 0;
+
+            movement.z = Input.GetKey(KeyCode.A) ? 1 :
+            Input.GetKey(KeyCode.D) ? -1 : 0;
         }
         else if (firstPersonCam.activeSelf)
         {
@@ -86,7 +88,7 @@ public class PlayerController : MonoBehaviour
     }
     void UpdateJump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded())
+        if (Input.GetButtonDown("Jump"))
             jumpRequested = true;
     }
 
@@ -120,7 +122,10 @@ public class PlayerController : MonoBehaviour
         }
         if(other.gameObject.CompareTag("Teleporter"))
         {
-            transform.position = new Vector3(62f, 19.75f, 24f);
+            transform.position = new Vector3(61f, 21.5f, 28.75f);
+            thirdPersonCam.SetActive(true);
+            firstPersonCam.SetActive(false);
+            StartCoroutine(ActiveBall());
         }
     }
     void OnTriggerExit(Collider other)
@@ -135,4 +140,10 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce * 7f, ForceMode.Impulse);
     }
 
+    IEnumerator ActiveBall()
+    {
+        FallingBall.SetActive(true);
+        yield return new WaitForSeconds(2);
+        FallingBall.GetComponent<Rigidbody>().useGravity = true;
+    }
 }
