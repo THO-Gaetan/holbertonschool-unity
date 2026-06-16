@@ -10,6 +10,8 @@ TagManager:
   - Trampo
   - ChangeCam
   - Teleporter
+  - DesactivateTrap
+  - ChangeCam3D
   layers:
   - Default
   - TransparentFX
@@ -23,8 +25,8 @@ TagManager:
   - Trampo
   - Teleporter
   - ChangeCam
-  - 
-  - 
+  - PlayerBody
+  - DesactivateTrap
   - 
   - 
   - 

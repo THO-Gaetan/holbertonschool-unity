@@ -4,17 +4,22 @@ public class CameraController : MonoBehaviour
 {
     public GameObject Player;
 
-    private float rotationSpeedY = 3f;
+    private float rotationSpeed = 3f;
     private Vector3 offset;
+    private float distance;
     private float rotationY;
     private float rotationX;
+
+    [SerializeField] private float minPitch = -20f;
+    [SerializeField] private float maxPitch = 70f;
 
     private void Start()
     {
         transform.rotation = Quaternion.Euler(0f, 90f, 0f);
         offset = Player.transform.position - transform.position;
-        rotationY = transform.eulerAngles.y;
-        rotationX = transform.eulerAngles.x;
+        distance = offset.magnitude;
+        rotationY = 90f;
+        rotationX = 20f;
     }
 
     // Update is called once per frame
@@ -22,21 +27,15 @@ public class CameraController : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            float mouseX = Input.GetAxis("Mouse X") * rotationSpeedY;
-            rotationY += mouseX;
-
-            Quaternion cameraRotation = Quaternion.Euler(0f, rotationY, 0f);
-            Vector3 rotatedOffset = cameraRotation * offset;
-
-            transform.position = Player.transform.position - rotatedOffset;
-            transform.LookAt(Player.transform.position);
-
+            rotationY += Input.GetAxis("Mouse X") * rotationSpeed;
+            rotationX -= Input.GetAxis("Mouse Y") * rotationSpeed;
+            rotationX = Mathf.Clamp(rotationX, minPitch, maxPitch);
         }
 
-        if (!Input.GetMouseButton(1))
-        {
-            transform.position = Player.transform.position - Quaternion.Euler(0f, rotationY, 0f) * offset;
-            transform.LookAt(Player.transform.position);
-        }
+        Quaternion cameraRotation = Quaternion.Euler(rotationX, rotationY, 0f);
+        Vector3 direction = cameraRotation * Vector3.back;
+
+        transform.position = Player.transform.position + direction * distance;
+        transform.LookAt(Player.transform.position);
     }
 }

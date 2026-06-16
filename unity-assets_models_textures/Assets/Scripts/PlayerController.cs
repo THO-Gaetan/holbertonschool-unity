@@ -6,11 +6,15 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject thirdPersonCam;
-    public GameObject firstPersonCam;
+    public int RandomNumber;
+    [SerializeField] private GameObject[] TrapPlatforms;
+    [SerializeField] private GameObject stairTrap;
+    [SerializeField] private Camera thirdPersonCam;
+    [SerializeField] private Camera firstPersonCam;
     public Rigidbody rb;
     private Vector3 movement = new Vector3(0, 0, 0);
     float speed = 1.75f;
+    float initialSpeed = 1.75f;
     float jumpForce = 2.5f;
     bool jumpRequested = false;
 
@@ -24,16 +28,19 @@ public class PlayerController : MonoBehaviour
     float ClimbSpeed = 1.10f;
 
     public GameObject FallingBall;
+    public bool controlEnabled = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        RandomNumberGenerator();
+        for (int i = 0; i < TrapPlatforms.Length; i++)
+            TrapPlatforms[i].GetComponent<MeshCollider>().enabled = (i == RandomNumber);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (thirdPersonCam.activeSelf)
+        if (thirdPersonCam.gameObject.activeSelf)
         {
             movement.x = Input.GetKey(KeyCode.W) ? 1 :
             Input.GetKey(KeyCode.S) ? -1 : 0;
@@ -41,7 +48,7 @@ public class PlayerController : MonoBehaviour
             movement.z = Input.GetKey(KeyCode.A) ? 1 :
             Input.GetKey(KeyCode.D) ? -1 : 0;
         }
-        else if (firstPersonCam.activeSelf)
+        else if (firstPersonCam.gameObject.activeSelf)
         {
             movement.x = Input.GetKey(KeyCode.D) ? 1 :
             Input.GetKey(KeyCode.A) ? -1 : 0;
@@ -54,10 +61,10 @@ public class PlayerController : MonoBehaviour
         UpdateClimb();
 
         if (Input.GetKey(KeyCode.LeftShift))
-            speed = 3.5f;
+            speed = initialSpeed * 1.2f;
         else
-            speed = 2.0f;
-        
+            speed = initialSpeed;
+
         if (Input.GetKeyDown(KeyCode.Escape))
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
@@ -65,9 +72,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!controlEnabled) return;
+        
         Vector3 moveDir = transform.forward * movement.z + transform.right * movement.x;
+        moveDir.Normalize();
 
-        rb.MovePosition(transform.position + moveDir * speed * Time.fixedDeltaTime);
+        rb.linearVelocity = new Vector3(moveDir.x * speed, rb.linearVelocity.y, moveDir.z * speed);
         transform.rotation = Quaternion.Euler(0, thirdPersonCam.transform.eulerAngles.y - 90, 0);
 
         if (jumpRequested)
@@ -117,15 +127,23 @@ public class PlayerController : MonoBehaviour
             canClimb = true;
         if (other.gameObject.CompareTag("ChangeCam"))
         {
-            thirdPersonCam.SetActive(false);
-            firstPersonCam.SetActive(true);
+            thirdPersonCam.gameObject.SetActive(false);
+            firstPersonCam.gameObject.SetActive(true);
+            firstPersonCam.cullingMask &= ~(1 << LayerMask.NameToLayer("PlayerBody"));
         }
         if(other.gameObject.CompareTag("Teleporter"))
         {
             transform.position = new Vector3(61f, 21.5f, 28.75f);
-            thirdPersonCam.SetActive(true);
-            firstPersonCam.SetActive(false);
+            thirdPersonCam.gameObject.SetActive(true);
+            firstPersonCam.gameObject.SetActive(false);
+            firstPersonCam.cullingMask |= (1 << LayerMask.NameToLayer("PlayerBody"));
             StartCoroutine(ActiveBall());
+        }
+        if (other.gameObject.CompareTag("ChangeCam3D"))
+        {
+            thirdPersonCam.gameObject.SetActive(true);
+            firstPersonCam.gameObject.SetActive(false);
+            firstPersonCam.cullingMask |= (1 << LayerMask.NameToLayer("PlayerBody"));
         }
     }
     void OnTriggerExit(Collider other)
@@ -137,13 +155,37 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Trampo"))
-            rb.AddForce(Vector3.up * jumpForce * 7f, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpForce * 6f, ForceMode.Impulse);
+        if(collision.gameObject.CompareTag("DesactivateTrap"))
+            stairTrap.GetComponent<MeshCollider>().enabled = true;
     }
 
-    IEnumerator ActiveBall()
+    int RandomNumberGenerator()
+    {
+        RandomNumber = Random.Range(0, TrapPlatforms.Length);
+        return RandomNumber;
+    }
+
+    public void StunUntilGrounded()
+    {
+        controlEnabled = false;
+        StartCoroutine(WaitForGround());
+    }
+
+    private IEnumerator WaitForGround()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        while (!isGrounded())
+            yield return null;
+
+        controlEnabled = true;
+    }
+
+    private IEnumerator ActiveBall()
     {
         FallingBall.SetActive(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2.5f);
         FallingBall.GetComponent<Rigidbody>().useGravity = true;
     }
 }
