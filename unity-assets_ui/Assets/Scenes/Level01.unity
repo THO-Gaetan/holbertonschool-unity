@@ -34571,9 +34571,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2614878552622835906, guid: 55b28af9ae996624cb12b7bed6f55c87, type: 3}
+      propertyPath: m_EffectDistance.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614878552622835906, guid: 55b28af9ae996624cb12b7bed6f55c87, type: 3}
+      propertyPath: m_EffectDistance.y
+      value: -4
+      objectReference: {fileID: 0}
     - target: {fileID: 7760401297681197763, guid: 55b28af9ae996624cb12b7bed6f55c87, type: 3}
       propertyPath: m_Name
       value: WinCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760401297681197763, guid: 55b28af9ae996624cb12b7bed6f55c87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
