@@ -805,17 +805,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7330041748871251308, guid: f51d46f0cca8ffd40ba7b372d76d3ba9, type: 3}
   m_PrefabInstance: {fileID: 1494097395799777297}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &996274084 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7994014067289800453, guid: f51d46f0cca8ffd40ba7b372d76d3ba9, type: 3}
-  m_PrefabInstance: {fileID: 1494097395799777297}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1190759962
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,17 +964,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5298938053221279665, guid: a758dcc0a688b8a47b9c00a4b0dea259, type: 3}
   m_PrefabInstance: {fileID: 729186445054544423}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1205462972 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6833159951697419104, guid: a758dcc0a688b8a47b9c00a4b0dea259, type: 3}
-  m_PrefabInstance: {fileID: 729186445054544423}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1979602583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,10 +1254,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 673216406}
     m_Modifications:
-    - target: {fileID: -4562781558649066480, guid: a758dcc0a688b8a47b9c00a4b0dea259, type: 3}
-      propertyPath: exitButton
-      value: 
-      objectReference: {fileID: 1205462972}
     - target: {fileID: 1065996682485830389, guid: a758dcc0a688b8a47b9c00a4b0dea259, type: 3}
       propertyPath: m_Name
       value: ExitButton
@@ -1377,10 +1351,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 673216406}
     m_Modifications:
-    - target: {fileID: 2915530469391296802, guid: f51d46f0cca8ffd40ba7b372d76d3ba9, type: 3}
-      propertyPath: optionsButton
-      value: 
-      objectReference: {fileID: 996274084}
     - target: {fileID: 6297214308048478454, guid: f51d46f0cca8ffd40ba7b372d76d3ba9, type: 3}
       propertyPath: m_Name
       value: OptionsButton
