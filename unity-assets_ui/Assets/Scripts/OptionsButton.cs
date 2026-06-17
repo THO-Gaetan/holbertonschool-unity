@@ -20,6 +20,7 @@ public class OptionsButton : MonoBehaviour
     public void Options()
     {
         optionsButton.onClick.AddListener (( ) => {
+            Time.timeScale = 1f;
             SceneHistory.previousScene = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("Options");
         });

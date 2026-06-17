@@ -10,8 +10,11 @@ public class CameraController : MonoBehaviour
     private float rotationY;
     private float rotationX;
 
+    [SerializeField] public bool isInverted;
+
     [SerializeField] private float minPitch = -20f;
     [SerializeField] private float maxPitch = 70f;
+    [SerializeField] public OptionsMenu optionsMenuScript;
 
     private void Start()
     {
@@ -20,6 +23,7 @@ public class CameraController : MonoBehaviour
         distance = offset.magnitude;
         rotationY = 90f;
         rotationX = 20f;
+        isInverted = PlayerPrefs.GetInt("InvertY", 0) == 1;
     }
 
     // Update is called once per frame
@@ -28,7 +32,11 @@ public class CameraController : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             rotationY += Input.GetAxis("Mouse X") * rotationSpeed;
-            rotationX -= Input.GetAxis("Mouse Y") * rotationSpeed;
+            float TempRotationX = Input.GetAxis("Mouse Y") * rotationSpeed;
+            if (isInverted)
+                rotationX += TempRotationX;
+            else
+                rotationX -= TempRotationX;   
             rotationX = Mathf.Clamp(rotationX, minPitch, maxPitch);
         }
 

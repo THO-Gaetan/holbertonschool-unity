@@ -61,12 +61,9 @@ public class PlayerController : MonoBehaviour
         UpdateClimb();
 
         if (Input.GetKey(KeyCode.LeftShift))
-            speed = initialSpeed * 1.2f;
+            speed = initialSpeed * 1.4f;
         else
             speed = initialSpeed;
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
 
