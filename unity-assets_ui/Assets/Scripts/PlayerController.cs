@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject FallingBall;
     public bool controlEnabled = true;
+
+    public bool freeze;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -60,9 +62,14 @@ public class PlayerController : MonoBehaviour
         UpdateJump();
         UpdateClimb();
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (freeze)
+        {
+            rb.linearVelocity = Vector3.zero;
+            speed = 0;
+        }
+        else if (Input.GetKey(KeyCode.LeftShift))
             speed = initialSpeed * 1.4f;
-        else
+        else if (!(Input.GetKey(KeyCode.LeftShift)))
             speed = initialSpeed;
 
     }
@@ -124,6 +131,7 @@ public class PlayerController : MonoBehaviour
             canClimb = true;
         if (other.gameObject.CompareTag("ChangeCam"))
         {
+            LockCursor();
             thirdPersonCam.gameObject.SetActive(false);
             firstPersonCam.gameObject.SetActive(true);
             firstPersonCam.cullingMask &= ~(1 << LayerMask.NameToLayer("PlayerBody"));
@@ -131,6 +139,7 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.CompareTag("Teleporter"))
         {
             transform.position = new Vector3(61f, 21.5f, 28.75f);
+            UnlockCursor();
             thirdPersonCam.gameObject.SetActive(true);
             firstPersonCam.gameObject.SetActive(false);
             firstPersonCam.cullingMask |= (1 << LayerMask.NameToLayer("PlayerBody"));
@@ -138,6 +147,7 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("ChangeCam3D"))
         {
+            UnlockCursor();
             thirdPersonCam.gameObject.SetActive(true);
             firstPersonCam.gameObject.SetActive(false);
             firstPersonCam.cullingMask |= (1 << LayerMask.NameToLayer("PlayerBody"));
@@ -169,6 +179,17 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(WaitForGround());
     }
 
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+    
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     private IEnumerator WaitForGround()
     {
         yield return new WaitForSeconds(0.2f);

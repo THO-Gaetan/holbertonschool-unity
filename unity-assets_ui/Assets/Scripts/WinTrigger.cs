@@ -6,6 +6,10 @@ public class WinTrigger : MonoBehaviour
 {
     public MonoBehaviour timerScript;
     public TMP_Text timerText;
+    public TMP_Text FinishTimeText;
+    public GameObject winCanvas;
+    public GameObject timerCanvas;
+    public GameObject EventManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,9 +26,12 @@ public class WinTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Time.timeScale = 0f;
+            FinishTimeText.text = timerText.text;
             timerScript.enabled = false;
-            timerText.color = Color.green;
-            timerText.fontSize = 60;
+            timerCanvas.SetActive(false);
+            EventManager.SetActive(false);
+            winCanvas.SetActive(true);
         }
     }
 }
