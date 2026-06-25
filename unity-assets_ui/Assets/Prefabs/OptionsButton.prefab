@@ -65,9 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Options
-
-'
+  m_text: Options
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dafdef2a68414a84883fffd0e8ed28ec, type: 2}
   m_sharedMaterial: {fileID: 4803461282163336392, guid: dafdef2a68414a84883fffd0e8ed28ec, type: 2}
@@ -273,3 +271,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a44c35983b5f204599278db77bf23fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OptionsButton
+  optionsButton: {fileID: 7994014067289800453}
