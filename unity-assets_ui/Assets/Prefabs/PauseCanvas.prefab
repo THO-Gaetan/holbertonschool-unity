@@ -133,7 +133,6 @@ GameObject:
   - component: {fileID: 2036332187780843240}
   - component: {fileID: 9151088913929842890}
   - component: {fileID: 9083144101261798912}
-  - component: {fileID: 7712271975093664142}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -243,18 +242,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7712271975093664142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321506711508493529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e734c6d3a5b3bf24d9daf78e92bb8776, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
 --- !u!1 &967187385931171116
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,9 +702,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Restart
-
-'
+  m_text: Restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dafdef2a68414a84883fffd0e8ed28ec, type: 2}
   m_sharedMaterial: {fileID: 4803461282163336392, guid: dafdef2a68414a84883fffd0e8ed28ec, type: 2}

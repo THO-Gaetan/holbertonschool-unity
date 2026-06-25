@@ -35911,6 +35911,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4156996683566869159, guid: 87b546cfc7e638b4daf743116db191d3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5393581166075358591, guid: 87b546cfc7e638b4daf743116db191d3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -35990,6 +35994,10 @@ PrefabInstance:
     - target: {fileID: 5393581166075358591, guid: 87b546cfc7e638b4daf743116db191d3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475065339771393701, guid: 87b546cfc7e638b4daf743116db191d3, type: 3}
+      propertyPath: m_text
+      value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 7712271975093664142, guid: 87b546cfc7e638b4daf743116db191d3, type: 3}
       propertyPath: resumeButton
