@@ -1386,6 +1386,10 @@ PrefabInstance:
       value: OptionsButton
       objectReference: {fileID: 0}
     - target: {fileID: 7243901084053031333, guid: f51d46f0cca8ffd40ba7b372d76d3ba9, type: 3}
+      propertyPath: m_text
+      value: Options
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243901084053031333, guid: f51d46f0cca8ffd40ba7b372d76d3ba9, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
