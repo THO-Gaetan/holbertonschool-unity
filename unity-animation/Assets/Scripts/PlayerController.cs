@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
             speed = initialSpeed;
 
         if (isGrounded())
-            characterAnimator.SetBool("Falling", false);
+            characterAnimator.SetBool("FallingDown", false);
 
     }
 
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Kill")) {
             transform.position = new Vector3(0, 20, 0);
-            characterAnimator.SetBool("Falling", true);
+            characterAnimator.SetBool("FallingDown", true);
         }
         if (other.gameObject.CompareTag("Climb"))
             canClimb = true;
