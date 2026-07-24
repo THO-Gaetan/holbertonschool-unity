@@ -31,8 +31,18 @@ public class PlayerController : MonoBehaviour
     public bool controlEnabled = true;
 
     public bool freeze;
+    
+    public bool groundIsGrass = false;
+    public bool groundIsRock = false;
 
     [SerializeField] private Animator characterAnimator;
+
+    [Header("Audio Sources")]
+    [SerializeField] private GameObject runningGrass;
+    [SerializeField] private GameObject runningRock;
+    [SerializeField] private GameObject landingGrass;
+    [SerializeField] private GameObject landingRock;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -76,7 +86,27 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded())
             characterAnimator.SetBool("FallingDown", false);
-
+        if (groundIsGrass && !isClimbing() && !characterAnimator.GetBool("isJumping") && characterAnimator.GetFloat("Speed") > 1)
+            runningGrass.SetActive(true);
+        else if (groundIsRock && !isClimbing() && !characterAnimator.GetBool("isJumping") && characterAnimator.GetFloat("Speed") > 1)
+            runningRock.SetActive(true);
+        else
+        {
+            runningGrass.SetActive(false);
+            runningRock.SetActive(false);
+        }
+        if (groundIsGrass && !isClimbing() && characterAnimator.GetBool("isJumping"))
+        {
+                landingGrass.SetActive(true);
+        }
+        else if (groundIsRock && !isClimbing() && characterAnimator.GetBool("isJumping"))
+        {
+            landingRock.SetActive(true);
+        }
+        else {
+            landingGrass.SetActive(false);
+            landingRock.SetActive(false);
+        }
     }
 
     void FixedUpdate()
@@ -176,6 +206,22 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce * 6f, ForceMode.Impulse);
         if(collision.gameObject.CompareTag("DesactivateTrap"))
             stairTrap.GetComponent<MeshCollider>().enabled = true;
+        if(collision.gameObject.CompareTag("Grass"))
+        {
+            groundIsGrass = true;
+        }
+        if(collision.gameObject.CompareTag("Rock"))
+        {
+            groundIsRock = true;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Grass"))
+            groundIsGrass = false;
+        if (collision.gameObject.CompareTag("Rock"))
+            groundIsRock = false;
     }
 
     int RandomNumberGenerator()

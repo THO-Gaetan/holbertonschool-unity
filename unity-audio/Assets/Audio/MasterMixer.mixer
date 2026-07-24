@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!243 &-7241017591165858448
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Running
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: ee73572f4c1a57049a8a8c6301deae16
+  m_Children: []
+  m_Volume: 7c609ceef64eca14d874f1c227fc781b
+  m_Pitch: 0df2b170ed79a4941a9d37a9663ef642
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 1394841042088104944}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &-4844541747729712186
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -39,6 +58,7 @@ AudioMixerController:
   - guids:
     - f6ce8f135055e6540b33a7ae8813c584
     - 1fe73ce7a7123434abd9d07ce1b9dc1b
+    - ee73572f4c1a57049a8a8c6301deae16
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -53,6 +73,7 @@ AudioMixerGroupController:
   m_GroupID: f6ce8f135055e6540b33a7ae8813c584
   m_Children:
   - {fileID: -4844541747729712186}
+  - {fileID: -7241017591165858448}
   m_Volume: 2297def8acb827a47b8a22d50760f881
   m_Pitch: af977a52a6c701140a24cac09ac308b1
   m_Send: 00000000000000000000000000000000
@@ -85,8 +106,23 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 6560c2eba29981e499caa531a55bad2c
-  m_FloatValues: {}
+  m_FloatValues:
+    7c609ceef64eca14d874f1c227fc781b: -20.09816
   m_TransitionOverrides: {}
+--- !u!244 &1394841042088104944
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 1fd0c63e59595a54c96a2fd46a3ea4e4
+  m_EffectName: Attenuation
+  m_MixLevel: 5f300cce565ea1548bafeef5541ba0fa
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &8822614810639029551
 AudioMixerEffectController:
   m_ObjectHideFlags: 3

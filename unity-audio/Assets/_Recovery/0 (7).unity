@@ -6778,7 +6778,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &330585544
 AudioListener:
   m_ObjectHideFlags: 0
@@ -33979,7 +33979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &2021524419
 Animator:
   serializedVersion: 7
@@ -36521,6 +36521,10 @@ PrefabInstance:
     - target: {fileID: 733942331125654660, guid: 70079f3b731232441b3c502a91d18937, type: 3}
       propertyPath: m_Name
       value: StartingPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 733942331125654660, guid: 70079f3b731232441b3c502a91d18937, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     - target: {fileID: 2139702542416544882, guid: 70079f3b731232441b3c502a91d18937, type: 3}
       propertyPath: m_Layer
