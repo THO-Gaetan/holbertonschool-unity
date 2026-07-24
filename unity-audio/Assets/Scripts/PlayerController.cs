@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     public bool controlEnabled = true;
 
     public bool freeze;
+
+    [SerializeField] private Animator characterAnimator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -72,6 +74,9 @@ public class PlayerController : MonoBehaviour
         else if (!(Input.GetKey(KeyCode.LeftShift)))
             speed = initialSpeed;
 
+        if (isGrounded())
+            characterAnimator.SetBool("FallingDown", false);
+
     }
 
     void FixedUpdate()
@@ -81,8 +86,12 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = transform.forward * movement.z + transform.right * movement.x;
         moveDir.Normalize();
 
+        characterAnimator.SetFloat("Speed", moveDir.magnitude * speed);
+
         rb.linearVelocity = new Vector3(moveDir.x * speed, rb.linearVelocity.y, moveDir.z * speed);
         transform.rotation = Quaternion.Euler(0, thirdPersonCam.transform.eulerAngles.y - 90, 0);
+
+        characterAnimator.SetBool("isJumping", !isGrounded());
 
         if (jumpRequested)
         {
@@ -125,8 +134,10 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Kill"))
+        if (other.gameObject.CompareTag("Kill")) {
             transform.position = new Vector3(0, 20, 0);
+            characterAnimator.SetBool("FallingDown", true);
+        }
         if (other.gameObject.CompareTag("Climb"))
             canClimb = true;
         if (other.gameObject.CompareTag("ChangeCam"))
