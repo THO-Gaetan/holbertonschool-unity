@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "unity-animation.slnx",
+    "dotnet.defaultSolution": "unity-audio.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
